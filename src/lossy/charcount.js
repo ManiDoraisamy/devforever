@@ -35,3 +35,11 @@ function countCharactersWithTool()
 countCharactersUsingJS();
 countCharactersWithoutTool();
 countCharactersWithTool();
+
+/* Results:
+
+JS: 5352
+OpenAI with tool: 5352
+OpenAI without tool: 5349
+
+*/
