@@ -3,8 +3,9 @@ const {openai} = require("../prompt");
 
 function countCharactersUsingJS()
 {
+  var start = Date.now();
   const text = fs.readFileSync("src/lossy/mother-tongue.md", "utf8");
-  console.log('JS: ' + text.replace(/\r/g, '').length);
+  console.log('JS: ' + text.replace(/\r/g, '').length, 'in ' + (Date.now() - start) + 'ms');
 }
 
 const system = `
@@ -15,13 +16,17 @@ Do not ask further questions.
   `.trim();
 
 function countCharactersWithoutTool()
-{ const text = fs.readFileSync("src/lossy/mother-tongue.md", "utf8");
+{
+  var start = Date.now();
+  const text = fs.readFileSync("src/lossy/mother-tongue.md", "utf8");
   return openai(system, text, {model:'gpt-5-mini', tools:[]})
-  .then(response =>console.log('OpenAI without tool: ' + response));
+  .then(response =>console.log('OpenAI without tool: ' + response, 'in ' + (Date.now() - start) + 'ms'));
 }
 
 function countCharactersWithTool()
-{ const text = fs.readFileSync("src/lossy/mother-tongue.md", "utf8");
+{
+  var start = Date.now();
+  const text = fs.readFileSync("src/lossy/mother-tongue.md", "utf8");
   var tools = [
     {
       type: "code_interpreter",
@@ -29,7 +34,7 @@ function countCharactersWithTool()
     }
   ];
   return openai(system, text, {model:'gpt-5-mini', tools})
-  .then(response =>console.log('OpenAI with tool: ' + response));
+  .then(response =>console.log('OpenAI with tool: ' + response, 'in ' + (Date.now() - start) + 'ms'));
 }
 
 countCharactersUsingJS();
@@ -38,8 +43,8 @@ countCharactersWithTool();
 
 /* Results:
 
-JS: 5352
-OpenAI with tool: 5352
-OpenAI without tool: 5349
+JS: 3443 in 1ms
+OpenAI with tool: 3443 in 25849ms
+OpenAI without tool: 3440 in 194271ms
 
 */
