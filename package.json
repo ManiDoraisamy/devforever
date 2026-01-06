@@ -1,0 +1,14 @@
+{
+  "name": "devforever",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^3.0.5",
+    "ai": "^6.0.12",
+    "dotenv": "^16.4.7",
+    "lodash.words": "^4.2.0",
+    "openai": "^6.15.0"
+  }
+}
